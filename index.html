@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Secret Luxury Watches</title>
+    <style>
+        /* ========== EDIT HERE - APNA PASSWORD LAGAO ========== */
+        :root {
+            --admin-password: 'admin123';  /* ← YAHAN PASSWORD BADLO */
+            --whatsapp-number: '923146718027';  /* ← YAHAN WHATSAPP NUMBER */
+            --store-name: 'Sky Secret';  /* ← YAHAN STORE NAME */
+        }
+        /* ==================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+        }
+
+        /* Admin Panel Toggle */
+        #admin-toggle {
+            position: fixed;
+            top: 20px;
+            right: 100px;
+            z-index: 1000;
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            display: none;
+        }
+
+        #admin-panel {
+            position: fixed;
+            top: 0;
+            left: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            transition: left 0.3s ease;
+            z-index: 999;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        #admin-panel.show {
+            left: 0;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+
+        .admin-section {
+            margin-bottom: 30px;
+        }
+
+        .admin-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .product-edit-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff9800;
+        }
+
+        .product-edit-item input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .save-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .delete-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .add-product-form {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Main Website Styles */
+        .top-bar {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 35px;
+            z-index: 99;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #000, #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #ff9800;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff9800;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .hero {
+            background: linear-gradient(45deg, #000, #333);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .hero button {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: #ff9800;
+            margin: 15px auto 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff9800;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 24px;
+            color: #ff9800;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 12px;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #333;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+            transition: right 0.3s ease;
+            z-index: 1001;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.show {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .cart-item-quantity button {
+            width: 25px;
+            height: 25px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .remove-item {
+            color: #f44336;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .cart-footer {
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+
+        .cart-total {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .close-cart {
+            background: #f0f0f0;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Reviews Section */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .review-stars {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: #666;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            font-size: 30px;
+            text-decoration: none;
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            background: white;
+            padding: 40px 20px;
+            margin: 40px 0;
+        }
+
+        .trust-badge {
+            text-align: center;
+        }
+
+        .trust-badge .icon {
+            font-size: 48px;
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+
+        .trust-badge h3 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .trust-badge p {
+            color: #666;
+        }
+
+        footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* Admin Login */
+        #admin-login {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .success-message {
+            background: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+            display: none;
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .category-tab {
+            padding: 10px 30px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .category-tab.active {
+            background: #ff9800;
+            color: white;
+        }
+
+        .category-tab:hover {
+            background: #ff9800;
+            color: white;
+        }
+
+        /* How To Use Section */
+        .how-to-use {
+            background: #e3f2fd;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+            border-left: 5px solid #2196F3;
+        }
+
+        .how-to-use h2 {
+            color: #1976D2;
+            margin-bottom: 20px;
+        }
+
+        .how-to-use ul {
+            list-style-type: none;
+        }
+
+        .how-to-use li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .how-to-use li:before {
+            content: "✓";
+            color: #4CAF50;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .how-to-use code {
+            background: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Login Button -->
+    <button id="admin-login" onclick="showAdminLogin()">🔐 Admin Login</button>
+    
+    <!-- Admin Panel Toggle -->
+    <button id="admin-toggle" onclick="toggleAdminPanel()">📝 Edit Products</button>
+
+    <!-- Admin Panel -->
+    <div id="admin-panel">
+        <div class="admin-header">
+            <h2>📝 Admin Panel</h2>
+            <button onclick="toggleAdminPanel()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+        </div>
+        
+        <div id="admin-success" class="success-message">✅ Changes Saved Permanently!</div>
+
+        <div class="admin-section">
+            <h3>Quick Stats</h3>
+            <p>Total Products: <span id="total-products">0</span></p>
+        </div>
+
+        <div class="admin-section">
+            <h3>📸 Image URL Guide</h3>
+            <p style="background: #e3f2fd; padding: 10px; border-radius: 5px;">
+                <strong>Placeholder URL:</strong> https://placehold.co/300x300/000/fff?text=Watch+Name<br>
+                <strong>PostImages.to:</strong> Upload karo aur "Direct Link" copy karo<br>
+                <strong>Google Photos:</strong> Right click > "Copy image address"
+            </p>
+        </div>
+
+        <div class="admin-section">
+            <h3>✏️ Edit Products</h3>
+            <div id="product-edit-list"></div>
+        </div>
+
+        <div class="add-product-form">
+            <h3>➕ Add New Product</h3>
+            <input type="text" id="new-title" placeholder="Product Title">
+            <input type="number" id="new-price" placeholder="Price">
+            <input type="number" id="new-old-price" placeholder="Old Price">
+            <input type="text" id="new-image" placeholder="Image URL" value="https://placehold.co/300x300/000/fff?text=New+Watch">
+            <select id="new-category">
+                <option value="rolex">Rolex Collection</option>
+                <option value="pp">Patek Philippe</option>
+                <option value="combo">Combo Deals</option>
+            </select>
+            <button class="save-btn" onclick="addNewProduct()">Add Product</button>
+        </div>
+
+        <div class="admin-section">
+            <h3>💾 Save/Load Data</h3>
+            <button class="save-btn" onclick="exportData()" style="background: #2196F3; margin-bottom: 10px;">📥 Download Backup</button>
+            <button class="save-btn" onclick="importData()" style="background: #9C27B0;">📤 Upload Backup</button>
+            <p style="font-size: 12px; margin-top: 10px;">Backup file save karo taake data kabhi na ghate</p>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Shopping Cart</h2>
+            <button onclick="toggleCart()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+        </div>
+        <div id="cart-items" class="cart-items"></div>
+        <div class="cart-footer">
+            <div id="cart-total" class="cart-total">Total: PKR 0</div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            <button class="close-cart" onclick="toggleCart()">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        ⭐ Sky Secret | Risk Free Deals | COD Available | Just 300 Advance for Order Confirmation ⭐
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">✨ SKY SECRET</div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#all-products">All Products</a>
+                <a href="#rolex">Rolex</a>
+                <a href="#pp">Patek</a>
+                <a href="#combo">Combo</a>
+                <a href="#reviews">Reviews</a>
+            </nav>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒
+                <span id="cart-count" class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Sky Secret</h1>
+        <p>Discover Luxury Like Never Before</p>
+        <button onclick="scrollToProducts()">Explore Collection</button>
+    </section>
+
+    <!-- Trust Badges -->
+    <div class="trust-badges">
+        <div class="trust-badge">
+            <div class="icon">🚚</div>
+            <h3>Free Shipping</h3>
+            <p>No Extra Costs</p>
+        </div>
+        <div class="trust-badge">
+            <div class="icon">🛡️</div>
+            <h3>100% Trusted</h3>
+            <p>Verified Seller</p>
+        </div>
+        <div class="trust-badge">
+            <div class="icon">💰</div>
+            <h3>Best Price</h3>
+            <p>Price Match</p>
+        </div>
+        <div class="trust-badge">
+            <div class="icon">⚡</div>
+            <h3>Quick Delivery</h3>
+            <p>2-4 Days</p>
+        </div>
+    </div>
+
+    <!-- All Products Section -->
+    <div class="container" id="all-products">
+        <h2 class="section-title">⌚ All Products</h2>
+        <div class="category-tabs">
+            <button class="category-tab active" onclick="filterProducts('all')">All</button>
+            <button class="category-tab" onclick="filterProducts('rolex')">Rolex</button>
+            <button class="category-tab" onclick="filterProducts('pp')">Patek</button>
+            <button class="category-tab" onclick="filterProducts('combo')">Combo</button>
+        </div>
+        <div id="all-products-grid" class="products-grid"></div>
+    </div>
+
+    <!-- Individual Category Sections -->
+    <div class="container" id="rolex">
+        <h2 class="section-title">⌚ Rolex Collection</h2>
+        <div id="rolex-products" class="products-grid"></div>
+    </div>
+
+    <div class="container" id="pp">
+        <h2 class="section-title">⌚ Patek Philippe Collection</h2>
+        <div id="pp-products" class="products-grid"></div>
+    </div>
+
+    <div class="container" id="combo">
+        <h2 class="section-title">⌚ Combo Deals</h2>
+        <div id="combo-products" class="products-grid"></div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="container" id="reviews">
+        <h2 class="section-title">⭐ Customer Reviews</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">"Thanks bro same wesy hi hai jesi order ki thi or quality bhi bht achi 100% satisfied"</p>
+                <p class="review-author">- Zubair owaisi</p>
+                <p class="review-date">2 days ago</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">"High quality packing was also very good totally satisfied"</p>
+                <p class="review-author">- M Ammar</p>
+                <p class="review-date">1 month ago</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">"Buhat pyari hai aur quality bhi buht achi hai, Best quality ❤"</p>
+                <p class="review-author">- Dua Malik</p>
+                <p class="review-date">2 weeks ago</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐</div>
+                <p class="review-text">"Wonderful, Thanks ❤"</p>
+                <p class="review-author">- M Imran</p>
+                <p class="review-date">3 weeks ago</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Sky Secret. All rights reserved.</p>
+        <p>📞 0314-6718027 | 📧 info@skysecret.com</p>
+        <p>📍 Pakistan</p>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/923146718027?text=Hi%21%20I%20want%20to%20order%20watches" class="whatsapp-btn" target="_blank">📱</a>
+
+    <!-- How To Use Section -->
+    <div class="container">
+        <div class="how-to-use">
+            <h2>📚 HOW TO USE THIS WEBSITE</h2>
+            <ul>
+                <li><strong>Admin Login:</strong> Top right corner <code>admin123</code> password se login karo</li>
+                <li><strong>Edit Products:</strong> Admin panel mein jaake kisi bhi product ki details change karo</li>
+                <li><strong>Add Products:</strong> "Add New Product" form mein bharo aur save karo</li>
+                <li><strong>Image URL:</strong> <code>https://placehold.co/300x300/000/fff?text=Watch+Name</code> format use karo</li>
+                <li><strong>Changes Save:</strong> Changes automatically save hote hain, page refresh par nahi jate</li>
+                <li><strong>Backup:</strong> "Download Backup" se data save karo, "Upload Backup" se restore karo</li>
+                <li><strong>Categories:</strong> "All Products" section mein sab products ek saath dekho</li>
+                <li><strong>Filter:</strong> Category tabs use karo products filter karne ke liye</li>
+                <li><strong>Cart:</strong> Product add karo, quantity change karo, WhatsApp par order bhejo</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // ========== PRODUCT DATA WITH 1-2 PRODUCTS PER CATEGORY ==========
+        
+        // Default Products - Sirf 1-2 products har category mein
+        const defaultProducts = [
+            // Rolex Collection (2 products)
+            { id: 1, title: "Rolex Black Silicone Strap", price: 3199, oldPrice: 4999, image: "https://placehold.co/300x300/000/fff?text=Rolex+Black", category: "rolex" },
+            { id: 2, title: "Rolex DateJust Two Tone Blue", price: 3650, oldPrice: 4999, image: "https://placehold.co/300x300/2c3e50/fff?text=Rolex+Blue", category: "rolex" },
+            
+            // Patek Philippe Collection (2 products)
+            { id: 3, title: "Patek Philippe Black", price: 3650, oldPrice: 4999, image: "https://placehold.co/300x300/1e1e1e/fff?text=Patek+Black", category: "pp" },
+            { id: 4, title: "Patek Philippe Navy Dail", price: 3650, oldPrice: 4999, image: "https://placehold.co/300x300/2980b9/fff?text=Patek+Navy", category: "pp" },
+            
+            // Combo Deals (2 products)
+            { id: 5, title: "Rolex Combo 3 in 1", price: 9250, oldPrice: 14949, image: "https://placehold.co/300x300/e74c3c/fff?text=Combo+3in1", category: "combo" },
+            { id: 6, title: "Rolex X Patek Combo", price: 9450, oldPrice: 14997, image: "https://placehold.co/300x300/8e44ad/fff?text=RP+Combo", category: "combo" }
+        ];
+
+        // Load products from localStorage or use defaults
+        let products = [];
+        let cart = [];
+        let isAdmin = false;
+
+        // Initialize
+        function init() {
+            loadProducts();
+            loadCart();
+            displayAllProducts();
+            displayProducts();
+            updateCartCount();
+            updateAdminStats();
+        }
+
+        // ========== PERMANENT STORAGE FUNCTIONS ==========
+        
+        function loadProducts() {
+            const saved = localStorage.getItem('skySecretProducts');
+            if (saved) {
+                products = JSON.parse(saved);
+            } else {
+                products = [...defaultProducts];
+                saveProducts();
+            }
+        }
+
+        function saveProducts() {
+            localStorage.setItem('skySecretProducts', JSON.stringify(products));
+            displayAllProducts();
+            displayProducts();
+            updateAdminEditList();
+            updateAdminStats();
+            showSuccessMessage();
+        }
+
+        function loadCart() {
+            const savedCart = localStorage.getItem('skySecretCart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('skySecretCart', JSON.stringify(cart));
+        }
+
+        function showSuccessMessage() {
+            const msg = document.getElementById('admin-success');
+            msg.style.display = 'block';
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 2000);
+        }
+
+        // Display All Products (with filter)
+        function displayAllProducts(filter = 'all') {
+            const container = document.getElementById('all-products-grid');
+            container.innerHTML = '';
+
+            let filteredProducts = products;
+            if (filter !== 'all') {
+                filteredProducts = products.filter(p => p.category === filter);
+            }
+
+            filteredProducts.forEach(product => {
+                container.innerHTML += createProductCard(product);
+            });
+        }
+
+        // Display Products by Category
+        function displayProducts() {
+            const rolexContainer = document.getElementById('rolex-products');
+            const ppContainer = document.getElementById('pp-products');
+            const comboContainer = document.getElementById('combo-products');
+
+            rolexContainer.innerHTML = '';
+            ppContainer.innerHTML = '';
+            comboContainer.innerHTML = '';
+
+            products.forEach(product => {
+                const card = createProductCard(product);
+                if (product.category === 'rolex') rolexContainer.innerHTML += card;
+                else if (product.category === 'pp') ppContainer.innerHTML += card;
+                else if (product.category === 'combo') comboContainer.innerHTML += card;
+            });
+        }
+
+        function createProductCard(product) {
+            return `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.title}" onerror="this.src='https://placehold.co/300x300/000/fff?text=Image+Error'">
+                        <span class="product-badge">-${Math.round((1 - product.price/product.oldPrice)*100)}%</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-price">
+                            PKR ${product.price.toLocaleString()}
+                            <span class="product-old-price">PKR ${product.oldPrice.toLocaleString()}</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Filter Products
+        function filterProducts(category) {
+            // Update active tab
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Display filtered products
+            displayAllProducts(category);
+        }
+
+        // Cart Functions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            saveCart();
+            updateCartCount();
+            alert(`${product.title} added to cart!`);
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('show');
+            displayCartItems();
+        }
+
+        function displayCartItems() {
+            const cartContainer = document.getElementById('cart-items');
+            let total = 0;
+
+            cartContainer.innerHTML = '';
+            
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.title}">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.title}</div>
+                            <div class="cart-item-price">PKR ${item.price.toLocaleString()}</div>
+                            <div class="cart-item-quantity">
+                                <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                                <span class="remove-item" onclick="removeFromCart(${item.id})">Remove</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('cart-total').textContent = `Total: PKR ${total.toLocaleString()}`;
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+                saveCart();
+                displayCartItems();
+                updateCartCount();
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            saveCart();
+            displayCartItems();
+            updateCartCount();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const message = `New Order:%0A${cart.map(item => `${item.title} x${item.quantity} = PKR ${item.price * item.quantity}`).join('%0A')}%0ATotal: PKR ${total}`;
+            
+            window.open(`https://wa.me/923146718027?text=${message}`, '_blank');
+        }
+
+        // Admin Functions
+        function showAdminLogin() {
+            const password = prompt('Enter Admin Password:');
+            if (password === 'admin123') { // ← YAHAN APNA PASSWORD BADLO
+                isAdmin = true;
+                document.getElementById('admin-toggle').style.display = 'block';
+                document.getElementById('admin-login').style.display = 'none';
+                alert('Admin login successful!');
+            } else {
+                alert('Wrong password!');
+            }
+        }
+
+        function toggleAdminPanel() {
+            document.getElementById('admin-panel').classList.toggle('show');
+            updateAdminEditList();
+        }
+
+        function updateAdminEditList() {
+            const list = document.getElementById('product-edit-list');
+            list.innerHTML = '';
+
+            products.forEach(product => {
+                list.innerHTML += `
+                    <div class="product-edit-item">
+                        <input type="text" id="title-${product.id}" value="${product.title}" placeholder="Title">
+                        <input type="number" id="price-${product.id}" value="${product.price}" placeholder="Price">
+                        <input type="number" id="old-price-${product.id}" value="${product.oldPrice}" placeholder="Old Price">
+                        <input type="text" id="image-${product.id}" value="${product.image}" placeholder="Image URL">
+                        <button class="save-btn" onclick="saveProduct(${product.id})">💾 Save Changes</button>
+                        <button class="delete-btn" onclick="deleteProduct(${product.id})">🗑️ Delete</button>
+                    </div>
+                `;
+            });
+        }
+
+        function saveProduct(id) {
+            const product = products.find(p => p.id === id);
+            product.title = document.getElementById(`title-${id}`).value;
+            product.price = parseInt(document.getElementById(`price-${id}`).value);
+            product.oldPrice = parseInt(document.getElementById(`old-price-${id}`).value);
+            product.image = document.getElementById(`image-${id}`).value;
+            
+            saveProducts();
+            alert('Product updated successfully!');
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                products = products.filter(p => p.id !== id);
+                saveProducts();
+                alert('Product deleted!');
+            }
+        }
+
+        function addNewProduct() {
+            const newProduct = {
+                id: Math.max(...products.map(p => p.id), 0) + 1,
+                title: document.getElementById('new-title').value,
+                price: parseInt(document.getElementById('new-price').value),
+                oldPrice: parseInt(document.getElementById('new-old-price').value),
+                image: document.getElementById('new-image').value,
+                category: document.getElementById('new-category').value
+            };
+
+            products.push(newProduct);
+            saveProducts();
+            alert('Product added successfully!');
+            
+            // Clear form
+            document.getElementById('new-title').value = '';
+            document.getElementById('new-price').value = '';
+            document.getElementById('new-old-price').value = '';
+        }
+
+        function updateAdminStats() {
+            document.getElementById('total-products').textContent = products.length;
+        }
+
+        // Backup Functions
+        function exportData() {
+            const dataStr = JSON.stringify(products, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'sky-secret-backup.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            alert('Backup downloaded successfully!');
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = readerEvent => {
+                    try {
+                        const content = readerEvent.target.result;
+                        const importedProducts = JSON.parse(content);
+                        products = importedProducts;
+                        saveProducts();
+                        alert('Data restored successfully!');
+                    } catch (error) {
+                        alert('Invalid backup file!');
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+
+        // Utility Functions
+        function scrollToProducts() {
+            document.getElementById('all-products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize on load
+        window.onload = init;
+    </script>
+</body>
+</html>
