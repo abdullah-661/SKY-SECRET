@@ -2,32 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sky Secret | Luxury Watches</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Sky Secret Luxury Watches</title>
     <style>
+        /* ========== GOOGLE FONTS ========== */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
         }
+
         body {
+            font-family: 'Poppins', sans-serif;
             background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
         }
+
+        /* ========== LUXURY THEME ========== */
         .top-bar {
             background: #1a1a1a;
             color: #d4af37;
             text-align: center;
-            padding: 8px;
-            font-size: 13px;
+            padding: 8px 10px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            font-weight: 500;
         }
+
         header {
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             position: sticky;
             top: 0;
             z-index: 100;
         }
+
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -35,26 +47,57 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
+
         .logo {
+            font-family: 'Playfair Display', serif;
             font-size: 24px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #000, #d4af37);
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a1a1a, #d4af37);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            cursor: pointer;
+            letter-spacing: 1px;
         }
+
+        /* ========== MOBILE MENU BUTTON ========== */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #333;
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         nav a {
-            margin: 0 10px;
             text-decoration: none;
             color: #333;
             font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-size: 14px;
         }
+
+        nav a:hover, nav a.active {
+            background: #d4af37;
+            color: white;
+        }
+
         .cart-icon {
             position: relative;
             cursor: pointer;
             font-size: 22px;
+            color: #333;
         }
+
         .cart-count {
             position: absolute;
             top: -8px;
@@ -68,41 +111,68 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
+            font-weight: bold;
         }
+
+        /* ========== HERO SECTION ========== */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1523170335258-f5ed11844a49');
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
             color: white;
             text-align: center;
             padding: 80px 20px;
+            position: relative;
         }
+
         .hero h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 8vw, 56px);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
         }
+
+        .hero p {
+            font-size: clamp(16px, 4vw, 20px);
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
         .hero button {
             background: #d4af37;
             color: #1a1a1a;
             border: none;
             padding: 12px 40px;
             font-size: 16px;
-            border-radius: 30px;
+            font-weight: 600;
+            border-radius: 50px;
             cursor: pointer;
-            margin-top: 20px;
-            font-weight: bold;
+            transition: all 0.3s;
+            letter-spacing: 1px;
         }
+
+        .hero button:hover {
+            background: #c4a030;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* ========== CONTAINER ========== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
         }
+
         .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 6vw, 36px);
             text-align: center;
-            font-size: 32px;
             margin-bottom: 40px;
             position: relative;
+            color: #1a1a1a;
         }
+
         .section-title::after {
             content: '';
             display: block;
@@ -111,51 +181,85 @@
             background: #d4af37;
             margin: 15px auto 0;
         }
+
+        /* ========== PRODUCT GRID ========== */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
+
         .product-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
+
         .product-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
+
         .product-image {
             height: 250px;
             overflow: hidden;
+            position: relative;
             background: #f5f5f5;
         }
+
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s;
         }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #d4af37;
+            color: #1a1a1a;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
         .product-info {
             padding: 20px;
         }
+
         .product-title {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 10px;
+            color: #1a1a1a;
+            line-height: 1.4;
         }
+
         .product-price {
             font-size: 22px;
             color: #d4af37;
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-weight: 700;
+            margin-bottom: 15px;
         }
+
         .product-old-price {
             text-decoration: line-through;
             color: #999;
             font-size: 14px;
             margin-left: 10px;
+            font-weight: normal;
         }
+
         .add-to-cart-btn {
             width: 100%;
             padding: 12px;
@@ -165,7 +269,171 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            letter-spacing: 1px;
         }
+
+        .add-to-cart-btn:hover {
+            background: #d4af37;
+            color: #1a1a1a;
+        }
+
+        /* ========== CATEGORY TABS ========== */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 10px 25px;
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .category-tab.active {
+            background: #d4af37;
+            border-color: #d4af37;
+            color: white;
+        }
+
+        .category-tab:hover {
+            border-color: #d4af37;
+        }
+
+        /* ========== TRUST BADGES ========== */
+        .trust-badges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            background: white;
+            padding: 40px 20px;
+            margin: 40px 0;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .trust-badge {
+            text-align: center;
+        }
+
+        .trust-badge .icon {
+            font-size: 40px;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+
+        .trust-badge h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #1a1a1a;
+        }
+
+        .trust-badge p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* ========== REVIEWS ========== */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .review-stars {
+            color: #d4af37;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .review-text {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: #d4af37;
+        }
+
+        .footer-contact {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        /* ========== WHATSAPP BUTTON ========== */
         .whatsapp-btn {
             position: fixed;
             bottom: 20px;
@@ -178,48 +446,198 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
             font-size: 30px;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
-            z-index: 1000;
+            transition: all 0.3s;
         }
-        footer {
-            background: #1a1a1a;
-            color: white;
-            text-align: center;
-            padding: 30px;
-            margin-top: 40px;
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
         }
-        .admin-panel {
+
+        /* ========== CART SIDEBAR ========== */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1001;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.show {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .cart-header h2 {
+            font-size: 20px;
+            color: #1a1a1a;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .cart-item img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .cart-item-price {
+            color: #d4af37;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .cart-item-quantity button {
+            width: 25px;
+            height: 25px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .remove-item {
+            color: #ff4444;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .cart-footer {
+            border-top: 2px solid #f0f0f0;
+            padding-top: 20px;
+        }
+
+        .cart-total {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: #d4af37;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: #c4a030;
+        }
+
+        .close-cart {
+            width: 100%;
+            padding: 12px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* ========== ADMIN ACCESS - SIRF AAPKE LIYE (SECRET) ========== */
+        #admin-login-trigger {
+            display: none;
+        }
+        
+        #admin-panel {
             position: fixed;
             top: 0;
             left: -400px;
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
             height: 100vh;
             background: white;
-            box-shadow: 2px 0 20px rgba(0,0,0,0.2);
-            transition: left 0.3s;
-            z-index: 1001;
+            box-shadow: 2px 0 30px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 1002;
             padding: 20px;
             overflow-y: auto;
         }
-        .admin-panel.show {
+
+        #admin-panel.show {
             left: 0;
         }
+
         .admin-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 2px solid #d4af37;
-            padding-bottom: 10px;
         }
+
+        .admin-header h2 {
+            color: #1a1a1a;
+            font-size: 22px;
+        }
+
         .product-edit-item {
-            background: #f5f5f5;
+            background: #f9f9f9;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 15px;
+            border-left: 4px solid #d4af37;
         }
+
         .product-edit-item input {
             width: 100%;
             padding: 8px;
@@ -227,6 +645,7 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+
         .save-btn {
             background: #4CAF50;
             color: white;
@@ -235,8 +654,10 @@
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
-            font-weight: bold;
+            font-weight: 600;
+            margin: 5px 0;
         }
+
         .delete-btn {
             background: #f44336;
             color: white;
@@ -244,270 +665,491 @@
             padding: 8px;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 5px;
+            width: 100%;
         }
-        @media (max-width: 768px) {
-            .admin-panel { width: 100%; }
+
+        .add-product-form {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .add-product-form input, .add-product-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* ========== MOBILE RESPONSIVE ========== */
+        @media screen and (max-width: 768px) {
+            .header-container {
+                position: relative;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                order: 1;
+            }
+            
+            .logo {
+                order: 2;
+                font-size: 20px;
+            }
+            
+            .cart-icon {
+                order: 3;
+            }
+            
+            nav {
+                display: none;
+                width: 100%;
+                order: 4;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 15px;
+            }
+            
+            nav.show {
+                display: flex;
+            }
+            
+            nav a {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+            
+            .hero {
+                padding: 60px 15px;
+            }
+            
+            .product-card {
+                margin-bottom: 10px;
+            }
+            
+            .trust-badges {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 30px 15px;
+            }
+            
+            .cart-sidebar {
+                max-width: 100%;
+            }
+            
+            #admin-panel {
+                max-width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .logo {
+                font-size: 18px;
+            }
+            
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 14px;
+            }
+            
+            .hero button {
+                padding: 10px 30px;
+                font-size: 14px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+            }
+            
+            .product-title {
+                font-size: 16px;
+            }
+            
+            .product-price {
+                font-size: 20px;
+            }
+            
+            .trust-badge .icon {
+                font-size: 30px;
+            }
+            
+            .trust-badge h3 {
+                font-size: 14px;
+            }
+            
+            .trust-badge p {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="top-bar">✨ SKY SECRET | RISK FREE DEALS | COD AVAILABLE ✨</div>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        ⭐ SKY SECRET | RISK FREE DEALS | COD AVAILABLE | 300 RS ADVANCE ⭐
+    </div>
 
+    <!-- Header -->
     <header>
         <div class="header-container">
-            <div class="logo" id="adminTrigger">✨ SKY SECRET</div>
-            <nav>
-                <a href="#home">Home</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            
+            <div class="logo">✨ SKY SECRET</div>
+            
+            <nav id="main-nav">
+                <a href="#home" class="active">Home</a>
                 <a href="#rolex">Rolex</a>
                 <a href="#pp">Patek</a>
                 <a href="#combo">Combo</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#" onclick="showSecretAdmin()" style="display: none;" id="secret-admin-link">⚙️</a>
             </nav>
+            
             <div class="cart-icon" onclick="toggleCart()">
                 🛒
-                <span id="cartCount" class="cart-count">0</span>
+                <span id="cart-count" class="cart-count">0</span>
             </div>
         </div>
     </header>
 
-    <div class="hero" id="home">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
         <h1>Sky Secret</h1>
         <p>Luxury Watches That Define Your Status</p>
-        <button onclick="document.getElementById('rolex').scrollIntoView({behavior:'smooth'})">Explore Collection</button>
+        <button onclick="scrollToProducts()">Explore Collection</button>
+    </section>
+
+    <!-- Trust Badges -->
+    <div class="container">
+        <div class="trust-badges">
+            <div class="trust-badge">
+                <div class="icon">🚚</div>
+                <h3>Free Shipping</h3>
+                <p>No Extra Costs</p>
+            </div>
+            <div class="trust-badge">
+                <div class="icon">🛡️</div>
+                <h3>100% Trusted</h3>
+                <p>Verified Seller</p>
+            </div>
+            <div class="trust-badge">
+                <div class="icon">💰</div>
+                <h3>Best Price</h3>
+                <p>Price Match</p>
+            </div>
+            <div class="trust-badge">
+                <div class="icon">⚡</div>
+                <h3>Quick Delivery</h3>
+                <p>2-4 Days</p>
+            </div>
+        </div>
     </div>
 
+    <!-- Category Tabs (for All Products) -->
+    <div class="container" id="all-products">
+        <h2 class="section-title">Our Collection</h2>
+        <div class="category-tabs">
+            <button class="category-tab active" onclick="filterProducts('all')">All</button>
+            <button class="category-tab" onclick="filterProducts('rolex')">Rolex</button>
+            <button class="category-tab" onclick="filterProducts('pp')">Patek</button>
+            <button class="category-tab" onclick="filterProducts('combo')">Combo</button>
+        </div>
+        <div id="all-products-grid" class="products-grid"></div>
+    </div>
+
+    <!-- Individual Category Sections -->
     <div class="container" id="rolex">
         <h2 class="section-title">Rolex Collection</h2>
-        <div id="rolexProducts" class="products-grid"></div>
+        <div id="rolex-products" class="products-grid"></div>
     </div>
 
     <div class="container" id="pp">
         <h2 class="section-title">Patek Philippe</h2>
-        <div id="ppProducts" class="products-grid"></div>
+        <div id="pp-products" class="products-grid"></div>
     </div>
 
     <div class="container" id="combo">
         <h2 class="section-title">Combo Deals</h2>
-        <div id="comboProducts" class="products-grid"></div>
+        <div id="combo-products" class="products-grid"></div>
     </div>
 
+    <!-- Reviews Section -->
+    <div class="container" id="reviews">
+        <h2 class="section-title">Customer Reviews</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">"Thanks bro same wesy hi hai jesi order ki thi or quality bhi bht achi 100% satisfied"</p>
+                <p class="review-author">- Zubair owaisi</p>
+                <p class="review-date">2 days ago</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">"High quality packing was also very good totally satisfied"</p>
+                <p class="review-author">- M Ammar</p>
+                <p class="review-date">1 month ago</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">"Buhat pyari hai aur quality bhi buht achi hai, Best quality ❤"</p>
+                <p class="review-author">- Dua Malik</p>
+                <p class="review-date">2 weeks ago</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
-        <p>© 2025 Sky Secret | 📞 0314-6718027 | Pakistan</p>
+        <div class="footer-content">
+            <div class="footer-logo">✨ SKY SECRET</div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#rolex">Rolex</a>
+                <a href="#pp">Patek</a>
+                <a href="#combo">Combo</a>
+                <a href="#reviews">Reviews</a>
+            </div>
+            <div class="footer-contact">
+                📞 0314-6718027 | 📍 Pakistan
+            </div>
+            <div class="copyright">
+                © 2025 Sky Secret. All rights reserved.
+            </div>
+        </div>
     </footer>
 
-    <a href="https://wa.me/923146718027" class="whatsapp-btn" target="_blank">📱</a>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/923146718027?text=Hi%21%20I%20want%20to%20order%20watches" class="whatsapp-btn" target="_blank">📱</a>
 
-    <!-- Admin Panel -->
-    <div id="adminPanel" class="admin-panel">
-        <div class="admin-header">
-            <h2>⚙️ Admin Panel</h2>
-            <button onclick="toggleAdmin()" style="background:none; border:none; font-size:24px;">&times;</button>
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Shopping Cart</h2>
+            <button onclick="toggleCart()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
         </div>
-        <div id="adminProductList"></div>
-        <div style="margin-top:20px; padding:15px; background:#f0f0f0; border-radius:10px;">
-            <h3>➕ Add Product</h3>
-            <input type="text" id="newTitle" placeholder="Title"><br>
-            <input type="number" id="newPrice" placeholder="Price"><br>
-            <input type="number" id="newOldPrice" placeholder="Old Price"><br>
-            <input type="text" id="newImage" placeholder="Image URL" value="https://placehold.co/300x300/000/fff?text=Watch"><br>
-            <select id="newCategory">
-                <option value="rolex">Rolex</option>
-                <option value="pp">Patek</option>
-                <option value="combo">Combo</option>
-            </select><br>
-            <button class="save-btn" onclick="addProduct()">Add Product</button>
-        </div>
-        <div style="margin-top:20px;">
-            <button class="save-btn" onclick="downloadBackup()" style="background:#2196F3;">📥 Download Backup</button>
+        <div id="cart-items" class="cart-items"></div>
+        <div class="cart-footer">
+            <div id="cart-total" class="cart-total">Total: PKR 0</div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            <button class="close-cart" onclick="toggleCart()">Continue Shopping</button>
         </div>
     </div>
 
-    <!-- Cart Sidebar -->
-    <div id="cartSidebar" class="admin-panel" style="left: auto; right: -400px; transition: right 0.3s;">
+    <!-- ========== SECRET ADMIN PANEL - SIRF AAP DEKH SAKTE HO ========== -->
+    <!-- Isko open karne ke liye logo par 5 baar click karo -->
+    <div id="admin-panel">
         <div class="admin-header">
-            <h2>🛒 Your Cart</h2>
-            <button onclick="toggleCart()" style="background:none; border:none; font-size:24px;">&times;</button>
+            <h2>⚙️ Admin Panel</h2>
+            <button onclick="toggleAdminPanel()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
         </div>
-        <div id="cartItems"></div>
-        <div style="margin-top:20px;">
-            <div id="cartTotal" style="font-size:20px; font-weight:bold; margin-bottom:15px;">Total: PKR 0</div>
-            <button class="save-btn" onclick="checkout()" style="background:#d4af37; color:#1a1a1a;">Checkout via WhatsApp</button>
+
+        <div class="product-edit-item">
+            <h3 style="margin-bottom: 10px;">📝 Quick Guide</h3>
+            <p style="font-size: 14px;">• Products edit karne ke liye neeche form use karo</p>
+            <p style="font-size: 14px;">• Sab changes automatically save hote hain</p>
+            <p style="font-size: 14px;">• Backup download karke safe rakh lo</p>
+        </div>
+
+        <div id="product-edit-list"></div>
+
+        <div class="add-product-form">
+            <h3>➕ Add New Product</h3>
+            <input type="text" id="new-title" placeholder="Product Title">
+            <input type="number" id="new-price" placeholder="Price">
+            <input type="number" id="new-old-price" placeholder="Old Price">
+            <input type="text" id="new-image" placeholder="Image URL" value="https://placehold.co/300x300/d4af37/1a1a1a?text=Watch">
+            <select id="new-category">
+                <option value="rolex">Rolex Collection</option>
+                <option value="pp">Patek Philippe</option>
+                <option value="combo">Combo Deals</option>
+            </select>
+            <button class="save-btn" onclick="addNewProduct()">Add Product</button>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button class="save-btn" onclick="exportData()" style="background: #2196F3;">📥 Download Backup</button>
+            <button class="save-btn" onclick="importData()" style="background: #9C27B0;">📤 Upload Backup</button>
         </div>
     </div>
 
     <script>
-        let products = [];
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // ========== PRODUCT DATA ==========
+        const defaultProducts = [
+            { id: 1, title: "Rolex Black Silicone Strap", price: 3199, oldPrice: 4999, image: "https://placehold.co/300x300/000000/ffffff?text=Rolex+Black", category: "rolex" },
+            { id: 2, title: "Rolex DateJust Blue", price: 3650, oldPrice: 4999, image: "https://placehold.co/300x300/2c3e50/ffffff?text=Rolex+Blue", category: "rolex" },
+            { id: 3, title: "Patek Philippe Black", price: 3650, oldPrice: 4999, image: "https://placehold.co/300x300/1a1a1a/ffffff?text=Patek+Black", category: "pp" },
+            { id: 4, title: "Patek Navy Dial", price: 3650, oldPrice: 4999, image: "https://placehold.co/300x300/2980b9/ffffff?text=Patek+Navy", category: "pp" },
+            { id: 5, title: "Rolex Combo 3 in 1", price: 9250, oldPrice: 14949, image: "https://placehold.co/300x300/d4af37/1a1a1a?text=Combo+3in1", category: "combo" },
+            { id: 6, title: "Rolex x Patek Combo", price: 9450, oldPrice: 14997, image: "https://placehold.co/300x300/c4a030/1a1a1a?text=RP+Combo", category: "combo" }
+        ];
 
-        // Load products from localStorage or use defaults
+        let products = [];
+        let cart = [];
+        let adminAccess = false;
+
+        // Load data
         function loadProducts() {
             const saved = localStorage.getItem('skySecretProducts');
             if (saved) {
                 products = JSON.parse(saved);
             } else {
-                products = [
-                    { id: 1, title: "Rolex Black Silicone", price: 3199, oldPrice: 4999, image: "https://placehold.co/300x300/000/fff?text=Rolex+Black", category: "rolex" },
-                    { id: 2, title: "Rolex DateJust Blue", price: 3650, oldPrice: 4999, image: "https://placehold.co/300x300/2c3e50/fff?text=Rolex+Blue", category: "rolex" },
-                    { id: 3, title: "Patek Philippe Black", price: 3650, oldPrice: 4999, image: "https://placehold.co/300x300/1a1a1a/fff?text=Patek+Black", category: "pp" },
-                    { id: 4, title: "Patek Navy Dial", price: 3650, oldPrice: 4999, image: "https://placehold.co/300x300/2980b9/fff?text=Patek+Navy", category: "pp" },
-                    { id: 5, title: "Rolex Combo 3 in 1", price: 9250, oldPrice: 14949, image: "https://placehold.co/300x300/d4af37/fff?text=Combo", category: "combo" }
-                ];
-                localStorage.setItem('skySecretProducts', JSON.stringify(products));
+                products = [...defaultProducts];
+                saveProducts();
             }
-            renderAll();
         }
 
-        function renderAll() {
-            renderProducts('rolex', 'rolexProducts');
-            renderProducts('pp', 'ppProducts');
-            renderProducts('combo', 'comboProducts');
-            updateCartCount();
+        function saveProducts() {
+            localStorage.setItem('skySecretProducts', JSON.stringify(products));
+            displayAllProducts();
+            displayProducts();
+            updateAdminEditList();
         }
 
-        function renderProducts(category, elementId) {
-            const container = document.getElementById(elementId);
+        // Display products
+        function displayAllProducts(filter = 'all') {
+            const container = document.getElementById('all-products-grid');
+            if (!container) return;
+            
             container.innerHTML = '';
-            products.filter(p => p.category === category).forEach(p => {
-                container.innerHTML += `
-                    <div class="product-card">
-                        <div class="product-image"><img src="${p.image}" alt="${p.title}"></div>
-                        <div class="product-info">
-                            <div class="product-title">${p.title}</div>
-                            <div class="product-price">PKR ${p.price.toLocaleString()} <span class="product-old-price">PKR ${p.oldPrice.toLocaleString()}</span></div>
-                            <button class="add-to-cart-btn" onclick="addToCart(${p.id})">Add to Cart</button>
-                        </div>
-                    </div>
-                `;
+            let filteredProducts = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            filteredProducts.forEach(product => {
+                container.innerHTML += createProductCard(product);
             });
         }
 
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            const existing = cart.find(c => c.id === id);
+        function displayProducts() {
+            const rolexContainer = document.getElementById('rolex-products');
+            const ppContainer = document.getElementById('pp-products');
+            const comboContainer = document.getElementById('combo-products');
+
+            if (rolexContainer) {
+                rolexContainer.innerHTML = '';
+                products.filter(p => p.category === 'rolex').forEach(p => {
+                    rolexContainer.innerHTML += createProductCard(p);
+                });
+            }
+
+            if (ppContainer) {
+                ppContainer.innerHTML = '';
+                products.filter(p => p.category === 'pp').forEach(p => {
+                    ppContainer.innerHTML += createProductCard(p);
+                });
+            }
+
+            if (comboContainer) {
+                comboContainer.innerHTML = '';
+                products.filter(p => p.category === 'combo').forEach(p => {
+                    comboContainer.innerHTML += createProductCard(p);
+                });
+            }
+        }
+
+        function createProductCard(product) {
+            return `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.title}" onerror="this.src='https://placehold.co/300x300/d4af37/1a1a1a?text=Watch'">
+                        <span class="product-badge">-${Math.round((1 - product.price/product.oldPrice)*100)}%</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-price">
+                            PKR ${product.price.toLocaleString()}
+                            <span class="product-old-price">PKR ${product.oldPrice.toLocaleString()}</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Filter products
+        function filterProducts(category) {
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            displayAllProducts(category);
+        }
+
+        // Cart functions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+            
             if (existing) {
                 existing.quantity++;
             } else {
                 cart.push({...product, quantity: 1});
             }
-            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            localStorage.setItem('skySecretCart', JSON.stringify(cart));
             updateCartCount();
-            alert('Added to cart!');
+            alert('Product added to cart!');
         }
 
         function updateCartCount() {
-            document.getElementById('cartCount').innerText = cart.reduce((s, i) => s + i.quantity, 0);
-        }
-
-        // Admin panel trigger (5 clicks on logo)
-        let clickCount = 0;
-        document.getElementById('adminTrigger').addEventListener('click', () => {
-            clickCount++;
-            setTimeout(() => { clickCount = 0; }, 500);
-            if (clickCount === 5) {
-                const pwd = prompt('Enter Admin Password:');
-                if (pwd === 'admin123') {
-                    document.getElementById('adminPanel').classList.add('show');
-                    renderAdminList();
-                } else {
-                    alert('Wrong password!');
-                }
-                clickCount = 0;
-            }
-        });
-
-        function renderAdminList() {
-            const list = document.getElementById('adminProductList');
-            list.innerHTML = '';
-            products.forEach(p => {
-                list.innerHTML += `
-                    <div class="product-edit-item">
-                        <input type="text" id="title-${p.id}" value="${p.title}">
-                        <input type="number" id="price-${p.id}" value="${p.price}">
-                        <input type="number" id="old-${p.id}" value="${p.oldPrice}">
-                        <input type="text" id="img-${p.id}" value="${p.image}">
-                        <button class="save-btn" onclick="updateProduct(${p.id})">💾 Update</button>
-                        <button class="delete-btn" onclick="deleteProduct(${p.id})">🗑️ Delete</button>
-                    </div>
-                `;
-            });
-        }
-
-        function updateProduct(id) {
-            const p = products.find(x => x.id === id);
-            p.title = document.getElementById(`title-${id}`).value;
-            p.price = +document.getElementById(`price-${id}`).value;
-            p.oldPrice = +document.getElementById(`old-${id}`).value;
-            p.image = document.getElementById(`img-${id}`).value;
-            localStorage.setItem('skySecretProducts', JSON.stringify(products));
-            renderAll();
-        }
-
-        function deleteProduct(id) {
-            if (confirm('Delete this product?')) {
-                products = products.filter(p => p.id !== id);
-                localStorage.setItem('skySecretProducts', JSON.stringify(products));
-                renderAll();
-                renderAdminList();
-            }
-        }
-
-        function addProduct() {
-            const newId = products.length ? Math.max(...products.map(p => p.id)) + 1 : 1;
-            products.push({
-                id: newId,
-                title: document.getElementById('newTitle').value,
-                price: +document.getElementById('newPrice').value,
-                oldPrice: +document.getElementById('newOldPrice').value,
-                image: document.getElementById('newImage').value,
-                category: document.getElementById('newCategory').value
-            });
-            localStorage.setItem('skySecretProducts', JSON.stringify(products));
-            renderAll();
-            renderAdminList();
-            document.getElementById('newTitle').value = '';
-            document.getElementById('newPrice').value = '';
-            document.getElementById('newOldPrice').value = '';
-        }
-
-        function downloadBackup() {
-            const data = JSON.stringify(products, null, 2);
-            const blob = new Blob([data], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'sky-secret-backup.json';
-            a.click();
-            alert('Backup downloaded!');
-        }
-
-        function toggleAdmin() {
-            document.getElementById('adminPanel').classList.remove('show');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
         }
 
         function toggleCart() {
-            const cartEl = document.getElementById('cartSidebar');
-            cartEl.style.right = cartEl.style.right === '0px' ? '-400px' : '0px';
-            renderCart();
+            document.getElementById('cart-sidebar').classList.toggle('show');
+            displayCart();
         }
 
-        function renderCart() {
-            const container = document.getElementById('cartItems');
-            container.innerHTML = '';
+        function displayCart() {
+            const container = document.getElementById('cart-items');
             let total = 0;
+            container.innerHTML = '';
+            
             cart.forEach(item => {
                 total += item.price * item.quantity;
                 container.innerHTML += `
-                    <div style="display:flex; gap:10px; margin-bottom:15px; padding:10px; border-bottom:1px solid #eee;">
-                        <img src="${item.image}" style="width:60px; height:60px; border-radius:8px; object-fit:cover;">
-                        <div>
-                            <div style="font-weight:bold;">${item.title}</div>
-                            <div>PKR ${item.price.toLocaleString()}</div>
-                            <div>Qty: ${item.quantity}</div>
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.title}">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.title}</div>
+                            <div class="cart-item-price">PKR ${item.price.toLocaleString()}</div>
+                            <div class="cart-item-quantity">
+                                <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                                <span class="remove-item" onclick="removeFromCart(${item.id})">Remove</span>
+                            </div>
                         </div>
                     </div>
                 `;
             });
-            document.getElementById('cartTotal').innerText = `Total: PKR ${total.toLocaleString()}`;
+            
+            document.getElementById('cart-total').textContent = `Total: PKR ${total.toLocaleString()}`;
+        }
+
+        function updateQuantity(id, change) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+                localStorage.setItem('skySecretCart', JSON.stringify(cart));
+                displayCart();
+                updateCartCount();
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            localStorage.setItem('skySecretCart', JSON.stringify(cart));
+            displayCart();
+            updateCartCount();
         }
 
         function checkout() {
@@ -515,15 +1157,152 @@
                 alert('Cart is empty!');
                 return;
             }
-            let msg = '🛍️ *New Order from Sky Secret*%0A%0A';
-            cart.forEach(i => msg += `• ${i.title} x${i.quantity} = PKR ${i.price * i.quantity}%0A`);
-            const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
-            msg += `%0A📦 *Total: PKR ${total}*`;
-            window.open(`https://wa.me/923146718027?text=${msg}`, '_blank');
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const message = `New Order:%0A${cart.map(item => `${item.title} x${item.quantity} = PKR ${item.price * item.quantity}`).join('%0A')}%0ATotal: PKR ${total}`;
+            window.open(`https://wa.me/923146718027?text=${message}`, '_blank');
+        }
+
+        // ========== SECRET ADMIN ACCESS ==========
+        // Logo par 5 baar click karo admin panel open karne ke liye
+        let clickCount = 0;
+        let clickTimer;
+
+        document.querySelector('.logo').addEventListener('click', function() {
+            clickCount++;
+            
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => {
+                if (clickCount >= 5) {
+                    // Password prompt
+                    const password = prompt('Enter Admin Password:');
+                    if (password === 'admin123') {
+                        adminAccess = true;
+                        document.getElementById('admin-panel').classList.add('show');
+                        updateAdminEditList();
+                        alert('Admin access granted!');
+                    } else {
+                        alert('Wrong password!');
+                    }
+                }
+                clickCount = 0;
+            }, 300);
+        });
+
+        function toggleAdminPanel() {
+            if (adminAccess) {
+                document.getElementById('admin-panel').classList.toggle('show');
+            }
+        }
+
+        function updateAdminEditList() {
+            const list = document.getElementById('product-edit-list');
+            list.innerHTML = '';
+            
+            products.forEach(product => {
+                list.innerHTML += `
+                    <div class="product-edit-item">
+                        <input type="text" id="title-${product.id}" value="${product.title}" placeholder="Title">
+                        <input type="number" id="price-${product.id}" value="${product.price}" placeholder="Price">
+                        <input type="number" id="old-price-${product.id}" value="${product.oldPrice}" placeholder="Old Price">
+                        <input type="text" id="image-${product.id}" value="${product.image}" placeholder="Image URL">
+                        <button class="save-btn" onclick="saveProduct(${product.id})">💾 Save Changes</button>
+                        <button class="delete-btn" onclick="deleteProduct(${product.id})">🗑️ Delete</button>
+                    </div>
+                `;
+            });
+        }
+
+        function saveProduct(id) {
+            const product = products.find(p => p.id === id);
+            product.title = document.getElementById(`title-${id}`).value;
+            product.price = parseInt(document.getElementById(`price-${id}`).value);
+            product.oldPrice = parseInt(document.getElementById(`old-price-${id}`).value);
+            product.image = document.getElementById(`image-${id}`).value;
+            saveProducts();
+            alert('Product updated!');
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Delete this product?')) {
+                products = products.filter(p => p.id !== id);
+                saveProducts();
+                updateAdminEditList();
+                alert('Product deleted!');
+            }
+        }
+
+        function addNewProduct() {
+            const newProduct = {
+                id: Math.max(...products.map(p => p.id), 0) + 1,
+                title: document.getElementById('new-title').value,
+                price: parseInt(document.getElementById('new-price').value),
+                oldPrice: parseInt(document.getElementById('new-old-price').value),
+                image: document.getElementById('new-image').value,
+                category: document.getElementById('new-category').value
+            };
+            
+            products.push(newProduct);
+            saveProducts();
+            updateAdminEditList();
+            alert('Product added!');
+            
+            document.getElementById('new-title').value = '';
+            document.getElementById('new-price').value = '';
+            document.getElementById('new-old-price').value = '';
+        }
+
+        function exportData() {
+            const dataStr = JSON.stringify(products, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            const link = document.createElement('a');
+            link.setAttribute('href', dataUri);
+            link.setAttribute('download', 'sky-secret-backup.json');
+            link.click();
+            alert('Backup downloaded!');
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = readerEvent => {
+                    try {
+                        products = JSON.parse(readerEvent.target.result);
+                        saveProducts();
+                        updateAdminEditList();
+                        alert('Data restored!');
+                    } catch {
+                        alert('Invalid file!');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            document.getElementById('main-nav').classList.toggle('show');
+        }
+
+        // Scroll to products
+        function scrollToProducts() {
+            document.getElementById('all-products').scrollIntoView({ behavior: 'smooth' });
         }
 
         // Initialize
-        window.onload = loadProducts;
+        window.onload = function() {
+            loadProducts();
+            const savedCart = localStorage.getItem('skySecretCart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartCount();
+            }
+        };
     </script>
 </body>
 </html>
