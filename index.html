@@ -1164,33 +1164,32 @@
 
     <script>
         // ========== PRODUCTS DATA - LEAD PRODUCTS EMPTY ==========
-        let products = [
-  {
-    "id": 1,
-    "title": "Tissot Prx Double Shade.",
-    "price": 3700,
-    "oldPrice": 3999,
-    "image": "https://image2url.com/r2/default/images/1771736698874-30aadc74-30ec-413c-a2a6-403fddb4f7c0.jpg",
-    "category": "rolex"
-  }
-]
+        let products = let products = [
+    {
+        "id": 1,
+        "title": "Tissot Prx Double Shade.",
+        "price": 3700,
+        "oldPrice": 3999,
+        "image": "https://image2url.com/r2/default/images/1777174609876-2023-01-17-10-00-00.png",
+        "category": "rolex"
+    }
+];
 
-        let cart = [];
-        let currentCategory = 'all';
+let cart = [];
+let currentCategory = 'all';
 
-        // ========== LOAD PRODUCTS ==========
-        function loadProducts() {
-            const saved = localStorage.getItem('skySecretProducts');
-            if (saved) {
-                products = JSON.parse(saved);
-            } else {
-                // Lead products empty - kuch nahi hai
-                products = [];
-                localStorage.setItem('skySecretProducts', JSON.stringify(products));
-            }
-            renderProducts('all');
-            updateCartCount();
-        }
+// ========== LOAD PRODUCTS ==========
+function loadProducts() {
+    const saved = localStorage.getItem('skySecretProducts');
+    if (saved) {
+        products = JSON.parse(saved);
+    } else {
+        localStorage.setItem('skySecretProducts', JSON.stringify(products));
+    }
+    renderProducts('all');
+    updateCartCount();
+}
+
 
         function renderProducts(category) {
             const grid = document.getElementById('productsGrid');
@@ -1496,6 +1495,7 @@
     </script>
 </body>
 </html>
+
 
 
 
