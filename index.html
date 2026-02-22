@@ -1163,8 +1163,7 @@
     </div>
 
     <script>
-        // ========== PRODUCTS DATA - LEAD PRODUCTS EMPTY ==========
-        let products = let products = [
+        let products = [
     {
         "id": 1,
         "title": "Tissot Prx Double Shade.",
@@ -1189,38 +1188,6 @@ function loadProducts() {
     renderProducts('all');
     updateCartCount();
 }
-
-
-        function renderProducts(category) {
-            const grid = document.getElementById('productsGrid');
-            grid.innerHTML = '';
-            currentCategory = category;
-            
-            let filtered = category === 'all' ? products : products.filter(p => p.category === category);
-            
-            if (filtered.length === 0) {
-                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 50px;"><h3>No products yet. Add from admin panel!</h3></div>';
-                return;
-            }
-            
-            filtered.forEach(p => {
-                const discount = Math.round((1 - p.price / p.oldPrice) * 100);
-                grid.innerHTML += `
-                    <div class="product-card" onclick="openProductModal(${p.id})">
-                        <div class="product-image">
-                            <img src="${p.image}" alt="${p.title}" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-title">${p.title}</div>
-                            <div class="product-price">
-                                PKR ${p.price.toLocaleString()}
-                                <span class="product-old-price">PKR ${p.oldPrice.toLocaleString()}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
 
         function filterProducts(category) {
             document.querySelectorAll('.category-tab').forEach(tab => {
@@ -1495,6 +1462,7 @@ function loadProducts() {
     </script>
 </body>
 </html>
+
 
 
 
